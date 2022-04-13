@@ -21,6 +21,15 @@ class Diver {
             [ id ]
         );
     }
+
+    create({ first_name, last_name, is_instructor, certification_id }) {
+        return db.query(
+            `INSERT INTO divers (first_name, last_name, is_instructor, certification_id)
+            VALUES ($1, $2, $3, $4)
+            RETURNING *`, // response data to see what has been added to the database 
+            [ first_name, last_name, is_instructor, certification_id ]
+        );
+    }
 }
 
 module.exports = new Diver();
